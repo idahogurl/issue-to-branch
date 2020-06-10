@@ -1,15 +1,15 @@
 # issue-to-branch
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that Create branch when GitHub issue is assigned
+> A GitHub App built with [Probot](https://github.com/probot/probot) that creates a branch in GitHub when a GitHub issue is assigned
 
 ## Setup
 
 ```sh
 # Install dependencies
-npm install
+yarn install
 
 # Run the bot
-npm start
+yarn start
 ```
 
 ## Contributing
