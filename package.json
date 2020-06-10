@@ -2,7 +2,7 @@
   "name": "issue-to-branch",
   "version": "1.0.0",
   "private": true,
-  "description": "Create branch when GitHub issue is assigned",
+  "description": "Creates a branch in GitHub when a GitHub issue is assigned",
   "author": "Rebecca Vest <olserebe@hotmail.com>",
   "license": "ISC",
   "repository": "https://github.com/idahogurl/issue-to-branch.git",
@@ -21,9 +21,11 @@
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "dependencies": {
+    "prettier": "^2.0.5",
     "probot": "^9.5.3"
   },
   "devDependencies": {
+    "eslint": "^7.2.0",
     "jest": "^24.9.0",
     "nock": "^12.0.0",
     "nodemon": "^2.0.0",
@@ -47,5 +49,8 @@
   },
   "jest": {
     "testEnvironment": "node"
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }

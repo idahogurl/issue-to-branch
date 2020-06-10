@@ -1,0 +1,18 @@
+{
+  "event": "issues",
+  "payload": {
+    "action": "assigned",
+    "issue": {
+      "number": 10,
+      "title": "Test Issue"
+    }, 
+    "repository": {
+      "name": "pin-pics",
+      "full_name": "idahogurl/pin-pics",
+      "private": false,
+      "owner": {
+        "login": "idahogurl"
+      }
+    }
+  }
+}
