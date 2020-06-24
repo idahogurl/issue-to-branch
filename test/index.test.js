@@ -2,13 +2,13 @@
 
 const nock = require('nock');
 // Requiring our app implementation
-const myProbotApp = require('..');
 const { Probot } = require('probot');
 // Requiring our fixtures
-const payload = require('./fixtures/issues.assigned');
 // const branchCreatedBody = { body: 'Thanks for opening this issue!' };
 const fs = require('fs');
 const path = require('path');
+const payload = require('./fixtures/issues.assigned');
+const myProbotApp = require('..');
 
 describe('My Probot app', () => {
   let probot;
