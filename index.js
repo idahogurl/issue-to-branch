@@ -10,7 +10,10 @@ module.exports = (app) => {
 
   app.on('issues.assigned', async (context) => {
     const configuration = await config.load(context);
-    return github.createIssueBranch(app, context, configuration);
+    const branchName = await github.createIssueBranch(context, configuration);
+    if (branchName) {
+      await github.addComment(context, branchName);
+    }
   });
 
   // For more information on building apps:

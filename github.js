@@ -1,21 +1,12 @@
 const utils = require('./utils');
 
-async function createIssueBranch(app, context, config) {
-  const branchName = getBranchNameFromIssue(context, config);
-  if (await branchExists(context, branchName)) {
-    // nop
-  } else {
-    const sha = await getSourceBranchHeadSha(context, config);
-    await createBranch({ context, branchName, sha });
-  }
-}
-
 function getBranchNameFromIssue(context, config) {
   const {
     issue: { number, title },
   } = context.payload;
   const branchPrefix = utils.makePrefixGitSafe(config.branchPrefix);
-  const prefixWordCt = branchPrefix ? branchPrefix.split('-').length : 0;
+  // default to 1 for the issue number
+  const prefixWordCt = branchPrefix ? branchPrefix.split('-').length : 1;
   let result;
   let wordCount;
   switch (config.branchName) {
@@ -39,21 +30,12 @@ function getBranchNameFromIssue(context, config) {
   return `${branchPrefix ? `${branchPrefix}-` : ''}${branchName}`;
 }
 
-function getRepoOwner({ repository }) {
-  return repository.owner.login;
-}
-
-function getRepoName({ repository }) {
-  return repository.name;
-}
-
 async function branchExists(context, branchName) {
-  const owner = getRepoOwner(context.payload);
-  const repo = getRepoName(context.payload);
+  const { owner, repo } = context.repo();
   try {
     await context.github.git.getRef({
-      owner: owner,
-      repo: repo,
+      owner,
+      repo,
       ref: `heads/${branchName}`,
     });
     return true;
@@ -62,14 +44,8 @@ async function branchExists(context, branchName) {
   }
 }
 
-async function getSourceBranchHeadSha(context) {
-  const { default_branch: defaultBranch } = context.payload.repository;
-  return await getBranchHeadSha(context, defaultBranch);
-}
-
 async function getBranchHeadSha(context, branch) {
-  const owner = getRepoOwner(context.payload);
-  const repo = getRepoName(context.payload);
+  const { owner, repo } = context.repo();
   try {
     const res = await context.github.git.getRef({
       owner,
@@ -83,20 +59,48 @@ async function getBranchHeadSha(context, branch) {
   }
 }
 
+async function getSourceBranchHeadSha(context) {
+  const { default_branch: defaultBranch } = context.payload.repository;
+  return getBranchHeadSha(context, defaultBranch);
+}
+
 async function createBranch({ context, branchName, sha }) {
-  const owner = getRepoOwner(context.payload);
-  const repo = getRepoName(context.payload);
+  const { owner, repo } = context.repo();
   const res = await context.github.git.createRef({
-    owner: owner,
-    repo: repo,
+    owner,
+    repo,
     ref: `refs/heads/${branchName}`,
-    sha: sha,
+    sha,
   });
   return res;
 }
 
+async function createIssueBranch(context, config) {
+  const branchName = getBranchNameFromIssue(context, config);
+  if (await branchExists(context, branchName)) {
+    // nop
+  } else {
+    const sha = await getSourceBranchHeadSha(context, config);
+    await createBranch({ context, branchName, sha });
+    return branchName;
+  }
+  return undefined;
+}
+
+async function addComment(context, branchName) {
+  const { owner, repo, number } = context.issue();
+  const body = `Branch [${branchName}](https://github.com/${owner}/${repo}/tree/${branchName}) created for issue`;
+  return context.github.issues.createComment({
+    owner,
+    repo,
+    issue_number: number,
+    body,
+  });
+}
+
 module.exports = {
-  createIssueBranch: createIssueBranch,
-  getBranchNameFromIssue: getBranchNameFromIssue,
-  createBranch: createBranch,
+  createIssueBranch,
+  getBranchNameFromIssue,
+  createBranch,
+  addComment,
 };
