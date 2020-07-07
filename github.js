@@ -87,15 +87,33 @@ async function createIssueBranch(context, config) {
   return undefined;
 }
 
-async function addCreateLinkComment(context) {
+async function createLinkExists(context) {
   const { owner, repo, number } = context.issue();
-  const body = `Click [here](https://issue-to-branch.herokuapp.com/issue-to-branch/create/${owner}/${repo}/issues/${number}) to create branch for issue`;
-  return context.github.issues.createComment({
+  const comments = await context.github.issues.listComments({
     owner,
     repo,
     issue_number: number,
-    body,
   });
+  const comment = comments.find((c) => {
+    return c.user.login === "issue-to-branch[bot]";
+  });
+  if (comment) {
+    return true;
+  }
+}
+
+async function addCreateLinkComment(context) {
+  const exists = await createLinkExists(context);
+  if (!exists) {
+    const { owner, repo, number } = context.issue();
+    const body = `Click [here](https://issue-to-branch.herokuapp.com/issue-to-branch/create/${owner}/${repo}/issues/${number}) to create branch for this issue`;
+    return context.github.issues.createComment({
+      owner,
+      repo,
+      issue_number: number,
+      body,
+    });
+  }
 }
 
 async function addCreatedComment(context, branchName) {

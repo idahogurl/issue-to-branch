@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.log("Yay, the app was loaded!");
 
   app.on("issues.assigned", async (context) => {
-    await github.addCreateLinkComment(context, branchName);
+    await github.addCreateLinkComment(context);
   });
 
   // Get an express router
