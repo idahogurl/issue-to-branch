@@ -1,4 +1,4 @@
-const utils = require('./utils');
+const utils = require("./utils");
 
 function getBranchNameFromIssue(context, config) {
   const {
@@ -6,17 +6,17 @@ function getBranchNameFromIssue(context, config) {
   } = context.payload;
   const branchPrefix = utils.makePrefixGitSafe(config.branchPrefix);
   // default to 1 for the issue number
-  const prefixWordCt = branchPrefix ? branchPrefix.split('-').length : 1;
+  const prefixWordCt = branchPrefix ? branchPrefix.split("-").length : 1;
   let result;
   let wordCount;
   switch (config.branchName) {
-    case 'tiny':
+    case "tiny":
       result = `${number}`;
       break;
-    case 'short':
+    case "short":
       result = `${number}`;
       break;
-    case 'full':
+    case "full":
       result = `${number}-${title}`;
       break;
     default:
@@ -25,9 +25,9 @@ function getBranchNameFromIssue(context, config) {
       wordCount = (config.titleWordCount || 5) + prefixWordCt;
       break;
   }
-  const replaceChar = config.replacementCharacter === 'underscore' ? '_' : '-';
+  const replaceChar = config.replacementCharacter === "underscore" ? "_" : "-";
   const branchName = utils.makeGitSafe(result, replaceChar, wordCount);
-  return `${branchPrefix ? `${branchPrefix}-` : ''}${branchName}`;
+  return `${branchPrefix ? `${branchPrefix}-` : ""}${branchName}`;
 }
 
 async function branchExists(context, branchName) {
@@ -87,7 +87,18 @@ async function createIssueBranch(context, config) {
   return undefined;
 }
 
-async function addComment(context, branchName) {
+async function addCreateLinkComment(context) {
+  const { owner, repo, number } = context.issue();
+  const body = `Click [here](https://issue-to-branch.herokuapp.com/issue-to-branch/create/${owner}/${repo}/issues/${number}) to create branch for issue`;
+  return context.github.issues.createComment({
+    owner,
+    repo,
+    issue_number: number,
+    body,
+  });
+}
+
+async function addCreatedComment(context, branchName) {
   const { owner, repo, number } = context.issue();
   const body = `Branch [${branchName}](https://github.com/${owner}/${repo}/tree/${branchName}) created for issue`;
   return context.github.issues.createComment({
@@ -102,5 +113,6 @@ module.exports = {
   createIssueBranch,
   getBranchNameFromIssue,
   createBranch,
-  addComment,
+  addCreateLinkComment,
+  addCreatedComment,
 };
