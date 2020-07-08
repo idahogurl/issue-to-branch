@@ -89,13 +89,16 @@ async function createIssueBranch(context, config) {
 
 async function createLinkExists(context) {
   const { owner, repo, number } = context.issue();
-  const comments = await context.github.issues.listComments({
+  const { data: comments } = await context.github.issues.listComments({
     owner,
     repo,
     issue_number: number,
   });
   const comment = comments.find((c) => {
-    return c.user.login === "issue-to-branch[bot]";
+    return (
+      c.user.login === "issue-to-branch[bot]" &&
+      body.includes(" to create a branch for this issue")
+    );
   });
   if (comment) {
     return true;
@@ -106,7 +109,7 @@ async function addCreateLinkComment(context) {
   const exists = await createLinkExists(context);
   if (!exists) {
     const { owner, repo, number } = context.issue();
-    const body = `Click [here](https://issue-to-branch.herokuapp.com/issue-to-branch/create/${owner}/${repo}/issues/${number}) to create branch for this issue`;
+    const body = `Click [here](https://issue-to-branch.herokuapp.com/issue-to-branch/create/${owner}/${repo}/issues/${number}) to create a branch for this issue`;
     return context.github.issues.createComment({
       owner,
       repo,
@@ -118,7 +121,7 @@ async function addCreateLinkComment(context) {
 
 async function addCreatedComment(context, branchName) {
   const { owner, repo, number } = context.issue();
-  const body = `Branch [${branchName}](https://github.com/${owner}/${repo}/tree/${branchName}) created for issue`;
+  const body = `Branch [${branchName}](https://github.com/${owner}/${repo}/tree/${branchName}) created for this issue`;
   return context.github.issues.createComment({
     owner,
     repo,

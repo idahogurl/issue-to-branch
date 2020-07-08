@@ -39,9 +39,8 @@ module.exports = (app) => {
     const branchName = await github.createIssueBranch(context, configuration);
     if (branchName) {
       await github.addCreatedComment(context, branchName);
-      res.status(201).end();
     }
-    res.status(200).end();
+    res.redirect(`https://www.github.com/${owner}/${repo}/issues/${issueId}`);
   });
   // For more information on building apps:
   // https://probot.github.io/docs/
