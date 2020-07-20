@@ -1,4 +1,6 @@
-const utils = require("./utils");
+const utils = require('./utils');
+
+require('dotenv').config();
 
 function getBranchNameFromIssue(context, config) {
   const {
@@ -6,17 +8,17 @@ function getBranchNameFromIssue(context, config) {
   } = context.payload;
   const branchPrefix = utils.makePrefixGitSafe(config.branchPrefix);
   // default to 1 for the issue number
-  const prefixWordCt = branchPrefix ? branchPrefix.split("-").length : 1;
+  const prefixWordCt = branchPrefix ? branchPrefix.split('-').length : 1;
   let result;
   let wordCount;
   switch (config.branchName) {
-    case "tiny":
+    case 'tiny':
       result = `${number}`;
       break;
-    case "short":
+    case 'short':
       result = `${number}`;
       break;
-    case "full":
+    case 'full':
       result = `${number}-${title}`;
       break;
     default:
@@ -25,9 +27,9 @@ function getBranchNameFromIssue(context, config) {
       wordCount = (config.titleWordCount || 5) + prefixWordCt;
       break;
   }
-  const replaceChar = config.replacementCharacter === "underscore" ? "_" : "-";
+  const replaceChar = config.replacementCharacter === 'underscore' ? '_' : '-';
   const branchName = utils.makeGitSafe(result, replaceChar, wordCount);
-  return `${branchPrefix ? `${branchPrefix}-` : ""}${branchName}`;
+  return `${branchPrefix ? `${branchPrefix}-` : ''}${branchName}`;
 }
 
 async function branchExists(context, branchName) {
@@ -94,12 +96,10 @@ async function createLinkExists(context) {
     repo,
     issue_number: number,
   });
-  const comment = comments.find((c) => {
-    return (
-      c.user.login === "issue-to-branch[bot]" &&
-      body.includes(" to create a branch for this issue")
-    );
-  });
+  const comment = comments.find(
+    (c) => c.user.login === 'issue-to-branch[bot]'
+      && c.body.includes(' to create a branch for this issue'),
+  );
   if (comment) {
     return true;
   }
