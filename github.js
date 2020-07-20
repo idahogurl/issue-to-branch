@@ -1,7 +1,5 @@
 const utils = require('./utils');
 
-require('dotenv').config();
-
 function getBranchNameFromIssue(context, config) {
   const {
     issue: { number, title },
