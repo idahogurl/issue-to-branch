@@ -119,7 +119,10 @@ async function addCreateLinkComment(context) {
 
 async function addCreatedComment(context, branchName) {
   const { owner, repo, number } = context.issue();
-  const body = `Branch [${branchName}](https://github.com/${owner}/${repo}/tree/${branchName}) created for this issue`;
+
+  const body = `Branch [${branchName}](https://github.com/${owner}/${repo}/tree/${branchName}) 
+created for this issue. Run command below in your terminal to checkout branch.<br>\`git fetch && git checkout ${branchName}\``;
+
   return context.github.issues.createComment({
     owner,
     repo,
