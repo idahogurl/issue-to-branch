@@ -23,7 +23,7 @@
   "dependencies": {
     "@octokit/auth-app": "^2.4.10",
     "dotenv": "^8.2.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.1.1",
     "probot": "^9.5.3",
     "yarn": "^1.22.4"
   },
