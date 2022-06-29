@@ -21,7 +21,7 @@
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "dependencies": {
-    "@octokit/auth-app": "2.4.10",
+    "@octokit/auth-app": "2.11.0",
     "dotenv": "8.2.0",
     "node-fetch": "2.6.7",
     "probot": "9.11.5",
