@@ -1,7 +1,14 @@
 /* eslint-env jest, node */
+const { Context, ProbotOctokit } = require('probot');
+const issuesAssigned = require('./fixtures/issues.assigned.json');
+const github = require('../lib/github');
 
-const context = require('./fixtures/issues.assigned');
-const github = require('../github');
+const context = new Context(
+  {
+    payload: issuesAssigned,
+  },
+  new ProbotOctokit(),
+);
 
 test('tiny branch name', () => {
   expect(github.getBranchNameFromIssue(context, { branchName: 'tiny' })).toBe('10');
