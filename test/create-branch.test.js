@@ -10,10 +10,6 @@ const installationsPayload = require('./fixtures/installations.json');
 const repository = require('./fixtures/repository.json');
 const issue = require('./fixtures/issue.json');
 
-jest.mock('@octokit/auth-app', () => ({
-  createAppAuth: () => () => Promise.resolve({ token: 'test' }),
-}));
-
 describe('GET /create/:owner/:repo/issues/:issueId', () => {
   function initializeNock() {
     nock.enableNetConnect('127.0.0.1');

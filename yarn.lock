@@ -2278,10 +2278,10 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
-dotenv@8.2.0:
-  version "8.2.0"
-  resolved "https://registry.npmjs.org/dotenv/-/dotenv-8.2.0.tgz"
-  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+dotenv@^16.0.2:
+  version "16.0.2"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.2.tgz#0b0f8652c016a3858ef795024508cddc4bffc5bf"
+  integrity sha512-JvpYKUmzQhYoIFgK2MOnF3bciIZoItIIoryihy0rIA+H4Jy0FmgyKYAHCTN98P5ybGSJcIFbh6QKeJdtZd1qhA==
 
 dotenv@^8.2.0:
   version "8.6.0"
@@ -5651,9 +5651,9 @@ pretty-ms@7.0.1:
   dependencies:
     parse-ms "^2.1.0"
 
-probot@^12.0.0:
+probot@^12.2.7:
   version "12.2.7"
-  resolved "https://registry.npmjs.org/probot/-/probot-12.2.7.tgz"
+  resolved "https://registry.yarnpkg.com/probot/-/probot-12.2.7.tgz#f66832c757b641a33257f1bf972c6d2337bbada9"
   integrity sha512-T39QMxlukg3YHs7p39HDg0+2EOIozzod64tBYSqz7biZhyhOB/vAytH/5wrF0WzqRjpd3kOWRTTKF0tvobRhjw==
   dependencies:
     "@octokit/core" "^3.2.4"
