@@ -39,7 +39,7 @@
     "vercel": "28.2.0"
   },
   "engines": {
-    "node": "16"
+    "node": "16.17.0"
   },
   "standard": {
     "env": [
