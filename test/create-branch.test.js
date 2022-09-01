@@ -53,7 +53,7 @@ describe('GET /create/:owner/:repo/issues/:issueId', () => {
     await createIssueBranch({
       owner: repository.owner.login,
       repo: repository.name,
-      issueId: issue.number,
+      issue: issue.number,
     });
     expect(createBranchSpy).not.toHaveBeenCalled();
   });
@@ -97,7 +97,7 @@ describe('GET /create/:owner/:repo/issues/:issueId', () => {
     await createIssueBranch({
       owner: repository.owner.login,
       repo: repository.name,
-      issueId: issue.number,
+      issue: issue.number,
     });
     expect(createBranchSpy).toHaveBeenCalled();
     expect(addCreatedCommentSpy).toHaveBeenCalled();
