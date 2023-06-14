@@ -1987,19 +1987,18 @@
     universal-github-app-jwt "^1.0.1"
     universal-user-agent "^6.0.0"
 
-"@octokit/auth-app@^4.0.9":
-  version "4.0.9"
-  resolved "https://registry.yarnpkg.com/@octokit/auth-app/-/auth-app-4.0.9.tgz#66500c8f66545d970a19123b9b364c678c972d6b"
-  integrity sha512-VFpKIXhHO+kVJtane5cEvdYPtjDKCOI0uKsRrsZfJP+uEu7rcPbQCLCcRKgyT+mUIzGr1IIOmwP/lFqSip1dXA==
+"@octokit/auth-app@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-app/-/auth-app-5.0.3.tgz#ea9fbeaf5b0171531686338be02e2df48d4b43c1"
+  integrity sha512-rZQImcsEODkGd3Phy+do5X1qTxV0iPlScsFO4yvfyVCWdODpwXf5m3Jw8ZzIDYBtFuNyudBtrWTQSQ/baWcJpA==
   dependencies:
-    "@octokit/auth-oauth-app" "^5.0.0"
-    "@octokit/auth-oauth-user" "^2.0.0"
+    "@octokit/auth-oauth-app" "^6.0.0"
+    "@octokit/auth-oauth-user" "^3.0.0"
     "@octokit/request" "^6.0.0"
-    "@octokit/request-error" "^3.0.0"
+    "@octokit/request-error" "^4.0.0"
     "@octokit/types" "^9.0.0"
-    "@types/lru-cache" "^5.1.0"
     deprecation "^2.3.1"
-    lru-cache "^6.0.0"
+    lru-cache "^9.0.0"
     universal-github-app-jwt "^1.1.1"
     universal-user-agent "^6.0.0"
 
@@ -2012,6 +2011,19 @@
     "@octokit/auth-oauth-user" "^2.0.0"
     "@octokit/request" "^5.6.3"
     "@octokit/types" "^7.0.0"
+    "@types/btoa-lite" "^1.0.0"
+    btoa-lite "^1.0.0"
+    universal-user-agent "^6.0.0"
+
+"@octokit/auth-oauth-app@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-oauth-app/-/auth-oauth-app-6.0.0.tgz#efd8d4d721fd5e13a62d0122e3ec9a9afcae0f02"
+  integrity sha512-ihIanzc2dX/FQJwTDeKR2xT2K+5IFV33yjkn4zhJ7HL7FPJjw0ynNcGkEJMzrFEsgIn7Qfjd+MA4jTay0rrbLQ==
+  dependencies:
+    "@octokit/auth-oauth-device" "^4.0.0"
+    "@octokit/auth-oauth-user" "^2.0.0"
+    "@octokit/request" "^6.0.0"
+    "@octokit/types" "^9.0.0"
     "@types/btoa-lite" "^1.0.0"
     btoa-lite "^1.0.0"
     universal-user-agent "^6.0.0"
@@ -2035,6 +2047,18 @@
     "@octokit/oauth-methods" "^2.0.0"
     "@octokit/request" "^6.0.0"
     "@octokit/types" "^7.0.0"
+    btoa-lite "^1.0.0"
+    universal-user-agent "^6.0.0"
+
+"@octokit/auth-oauth-user@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-oauth-user/-/auth-oauth-user-3.0.0.tgz#37e1863472a70e4c1f3d33e94da310257ab9af8d"
+  integrity sha512-qEyN6j4m72MFyTuOZZUqhJyNye1FKBJlu1JtkkiCG6dWN/iHB21uSsUM0qRQ6XpsS+dgG74JyncRHY3W9Nwz0Q==
+  dependencies:
+    "@octokit/auth-oauth-device" "^4.0.0"
+    "@octokit/oauth-methods" "^2.0.0"
+    "@octokit/request" "^6.0.0"
+    "@octokit/types" "^9.0.0"
     btoa-lite "^1.0.0"
     universal-user-agent "^6.0.0"
 
@@ -2190,6 +2214,15 @@
   integrity sha512-ym4Bp0HTP7F3VFssV88WD1ZyCIRoE8H35pXSKwLeMizcdZAYc/t6N9X9Yr9n6t3aG9IH75XDnZ6UeZph0vHMWQ==
   dependencies:
     "@octokit/types" "^7.0.0"
+    deprecation "^2.0.0"
+    once "^1.4.0"
+
+"@octokit/request-error@^4.0.0":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@octokit/request-error/-/request-error-4.0.1.tgz#6278255ade55a04aab59327c4e1359290523c39f"
+  integrity sha512-DBTkqzs0K6SlK1gRaQ6A6yOnKKkbVy8n/A9E7Es5qYONIxBghqiETPqWhG9l7qvWgp8v3sDkB8vlV2AAX1N6gw==
+  dependencies:
+    "@octokit/types" "^9.0.0"
     deprecation "^2.0.0"
     once "^1.4.0"
 
@@ -6969,6 +7002,11 @@ lru-cache@^7.14.1:
   version "7.18.3"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.18.3.tgz#f793896e0fd0e954a59dfdd82f0773808df6aa89"
   integrity sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==
+
+lru-cache@^9.0.0:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-9.1.2.tgz#255fdbc14b75589d6d0e73644ca167a8db506835"
+  integrity sha512-ERJq3FOzJTxBbFjZ7iDs+NiK4VI9Wz+RdrrAB8dio1oV+YvdPzUEE4QNiT2VD51DkIbCYRUUzCRkssXCHqSnKQ==
 
 lru_map@^0.3.3:
   version "0.3.3"
