@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@octokit/auth-app": "^4.0.9",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.4.1",
     "node-fetch": "^2.6.7",
     "probot": "^12.3.0"
   },
